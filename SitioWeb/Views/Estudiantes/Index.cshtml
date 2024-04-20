@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<SitioWeb.Models.Estudiante>
+﻿@model IEnumerable<SitioWeb.Models.Estudiante>
 
 @{
     Layout = null;
@@ -9,66 +8,123 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lista de Estudiantes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-right: 5px;
+            text-decoration: none;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+    </style>
 </head>
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.idEstudiante)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApelPaterno)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApelMaterno)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaInscrip)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Edad)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.idEstudiante)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApelPaterno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApelMaterno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaInscrip)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Edad)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { item.idEstudiante }) |
-                @Html.ActionLink("Details", "Details", new { item.idEstudiante }) |
-                @Html.ActionLink("Delete", "Delete", new { item.idEstudiante })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="container">
+        <h2>Lista de Estudiantes</h2>
+        <p>
+            <a class="btn btn-primary" href="@Url.Action("Create")">Crear Nuevo</a>
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Fecha de Inscripción</th>
+                    <th>Edad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.idEstudiante</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.ApelPaterno</td>
+                        <td>@item.ApelMaterno</td>
+                        <td>@item.FechaInscrip.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Edad</td>
+                        <td>
+                            <a class="btn btn-info" href="@Url.Action("Edit", new { id = item.idEstudiante })">Editar</a>
+                            @*<a class="btn btn-secondary" href="@Url.Action("Details", new { id = item.idEstudiante })">Detalles</a>*@
+                            <a class="btn btn-danger" href="@Url.Action("Delete", new { id = item.idEstudiante })">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

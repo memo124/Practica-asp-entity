@@ -60,22 +60,22 @@ namespace SitioWeb.Controllers
         }
 
         // GET: EstudiantesController/Edit/5    
-        public ActionResult Edit(int idEstudiante)
+        public ActionResult Edit(int id)
         {
-            var estudiante = RecuperaEstudiante(idEstudiante);
+            var estudiante = RecuperaEstudiante(id);
             return View(estudiante);
         }
 
         // POST: EstudiantesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int idEstudiante, IFormCollection collection)
+        public ActionResult Edit(int id, IFormCollection collection)
         {
             try
             {
                 using (var context = new Cinexion())
                 {
-                    var estudiante = context.estudiantes.Find(idEstudiante);
+                    var estudiante = context.estudiantes.Find(id);
                    
                     estudiante.Nombre = collection["Nombre"];
                     estudiante.ApelPaterno = collection["ApelPaterno"];
@@ -95,9 +95,9 @@ namespace SitioWeb.Controllers
         }
 
         // GET: EstudiantesController/Delete/5
-        public ActionResult Delete(int idEstudiante)
+        public ActionResult Delete(int id)
         {
-            var estudiante = RecuperaEstudiante(idEstudiante);
+            var estudiante = RecuperaEstudiante(id);
            
             return View(estudiante);
         }
